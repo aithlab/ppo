@@ -7,12 +7,7 @@ Created on Tue Sep 10 21:09:53 2019
 
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-import numpy as np
 
-from copy import deepcopy
-from numpy.testing import assert_almost_equal as aae
-from torch.distributions import Normal
 from actor_critic import ActorCritic
 
 class PPO(nn.Module):

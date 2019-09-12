@@ -18,9 +18,7 @@ SEED = 1234
 class NormalizeReward(RewardWrapper):
   def reward(self, reward):
     # th=[-3.14, 3.14], thdot = [-8,8], u = [-2,2]
-    th = 3.14
-    thdot = 8
-    u = 2
+    th,thdot,u = 3.14,8,2
     max_val = self.angle_normalize(th)**2 + .1*thdot**2 + .001*(u**2)
     
     return reward / max_val
@@ -38,7 +36,7 @@ action_dim = env.action_space.shape[0]
 model = PPO(state_dim, action_dim)
 
 N_epoch = 500
-T = 4000 #2048
+T = 2048 
 gamma = 0.99
 lambda_ = 0.95
 
