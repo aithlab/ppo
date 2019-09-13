@@ -37,30 +37,3 @@ class ActorCritic(nn.Module):
     
     return self.pi, self.v
 
-if __name__ == "__main__":
-  import gym
-  from numpy.testing import assert_almost_equal as aae
-  
-  env = gym.make('Pendulum-v0')
-  state_dim = env.observation_space.shape[0]
-  model = ActorCritic(state_dim)
-  model_old = ActorCritic(state_dim)
-  for param in model_old.parameters():
-    param.requires_grad = False
-  model_old.eval()
-  model_old.actor()
-  
-  # weight check
-  model_weights = [p.detach().numpy() for p in model.parameters()]
-  model_old_weights = [p.detach().numpy() for p in model_old.parameters()]
-  for idx in range(len(model_weights)):
-    aae(model_weights[idx], model_old_weights[idx])
-  
-  # copy weights from model to model_old
-  model_old.load_state_dict(model.state_dict())
-  model_weights = [p.detach().numpy() for p in model.parameters()]
-  model_old_weights = [p.detach().numpy() for p in model_old.parameters()]
-  for idx in range(len(model_weights)):
-    aae(model_weights[idx], model_old_weights[idx])
-  
-
