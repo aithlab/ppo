@@ -21,7 +21,7 @@ class NormalizeReward(RewardWrapper):
     th,thdot,u = 3.14,8,2
     max_val = self.angle_normalize(th)**2 + .1*thdot**2 + .001*(u**2)
     
-    return reward / max_val
+    return reward / (max_val+1e-4)
   
   def angle_normalize(self, x):
     return (((x+np.pi) % (2*np.pi)) - np.pi)

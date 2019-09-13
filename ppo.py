@@ -60,7 +60,7 @@ class PPO(nn.Module):
         v_target = reward + self.gamma*v_next
         loss_vf = ((v - v_target)**2).mean() # squared error loss: (v(s_t) - v_target)**2
         
-        loss = -(loss_clip - 0.5*loss_vf)
+        loss = -(loss_clip - loss_vf)
 #        loss = -(loss_clip - 0.5*loss_vf + 0.01*entropy.mean())
 
         self.optimizer.zero_grad()
